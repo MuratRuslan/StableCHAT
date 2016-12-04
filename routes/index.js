@@ -27,6 +27,7 @@ router.post("/", function (req, res) {
         }
     })
 });
+
 router.get("/register", function (req, res) {
     res.render("register/index.html");
 });
@@ -45,6 +46,7 @@ router.post("/chat", function (req, res) {
     delete req.cookies;
     res.redirect('/');
 });
+
 router.get("/chat", function (req, res) {
     if (!req.session.user_id) {
         res.redirect("/");
