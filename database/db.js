@@ -1,76 +1,70 @@
-var Sequelize=require("sequelize");
+var Sequelize = require("sequelize");
 
-  var sequelize=new Sequelize("CHAT_DB","root","root",{
-	host:"localhost",
-	dialect:"mysql"
-
-});
- 
-
-var db=sequelize.define("users",{
-  name:Sequelize.STRING,
-  password:Sequelize.STRING,
-  is_online:Sequelize.BOOLEAN
-});
-
-var dbMessages=sequelize.define("messages", {
-  message: Sequelize.STRING,
-  from: Sequelize.STRING
+var sequelize = new Sequelize("CHAT_DB", "root", "root", {
+    host: "localhost",
+    dialect: "mysql"
 });
 
 
-db.sync().then(function() {})
-dbMessages.sync().then(function() {})
+var db = sequelize.define("users", {
+    name: Sequelize.STRING,
+    password: Sequelize.STRING,
+    is_online: Sequelize.BOOLEAN
+});
 
-exports.addUser=function(name,password)
-{
-  db.create({name:name,password:password});
-  console.log("Database created!");
-}
+var dbMessages = sequelize.define("messages", {
+    message: Sequelize.STRING,
+    from: Sequelize.STRING
+});
 
 
-exports.hasUser=function(name,callback)
-{
-    db.count({where:{name:name}}).then(function(result){
-    	if(result!=0)
-    		callback(true);
-    	else
-    		callback(false);
+db.sync().then(function () {});
 
-    })
-}
+dbMessages.sync().then(function () {});
 
-exports.checkPass=function(name,pass,callback)
-{
-	db.count({where:{name:name,password:pass}}).then(function(result){
-     if(result!=0)
-     	callback(true);
-     else
-     	callback(false);
-	});
-}
+exports.addUser = function (name, password) {
+    db.create({name: name, password: password});
+    console.log("Database created!");
+};
 
-exports.getAll=function(callback){
-	db.findAll().then(function(result){
 
-		callback(result);
-	})
+exports.hasUser = function (name, callback) {
+    db.count({where: {name: name}}).then(function (result) {
+        if (result != 0)
+            callback(true);
+        else
+            callback(false);
+    });
+};
 
-}
+exports.checkPass = function (name, pass, callback) {
+    db.count({where: {name: name, password: pass}}).then(function (result) {
+        if (result != 0)
+            callback(true);
+        else
+            callback(false);
+    });
+};
 
-exports.addMessage = function(message, from) {
-  dbMessages.create({message:message, from: from});
-}
+exports.getAll = function (callback) {
+    db.findAll().then(function (result) {
+        callback(result);
+    });
+};
 
-exports.getAllMessages = function(callback) {
-  dbMessages.findAll().then(function(result) {
-    callback(result);
-  })
-}
+exports.addMessage = function (message, from) {
+    dbMessages.create({message: message, from: from});
+};
 
-exports.updateStatus = function(user_id, status) {
-  db.update({is_online: status} ,{where: {name: user_id}});
-}
+exports.getAllMessages = function (callback) {
+    dbMessages.findAll().then(function (result) {
+        callback(result);
+    });
+};
+
+exports.updateStatus = function (user_id, status) {
+    db.update({is_online: status}, {where: {name: user_id}});
+};
 
 
 

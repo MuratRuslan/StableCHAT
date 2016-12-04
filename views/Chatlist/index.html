@@ -1,62 +1,72 @@
 <!DOCTYPE html>
-<html >
-  <head>
+<html>
+
+<head>
     <meta charset="UTF-8">
     <title>Chat</title>
-        <link rel="stylesheet" href="css/chat.css">
-    <script src="/socket.io/socket.io.js"></script>    
-  </head>
+    <link rel="stylesheet" href="css/chat.css">
+    <script src="/socket.io/socket.io.js"></script>
+</head>
 
-  <body>
-    <!--<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>-->
+<body>
+
 <div id="logout">
-<form method="POST">
-    <button class="logoutButton" >logout</button>
-</form>
+    <form method="POST">
+        <button class="logoutButton">logout</button>
+    </form>
 </div>
+
 <div id="chatbox">
-	<div id="friendslist">
-    	<div id="topmenu">
-        	<span class="friends"></span>
+
+    <div id="friendslist">
+
+        <div id="topmenu">
+            <span class="friends"></span>
         </div>
+
         {% for element in names %}
         <div id="friends">
-        	<div class="friend">
+            <div class="friend">
                 <p>
-                	<strong>{{ element.name }}</strong>
+                    <strong>{{ element.name }}</strong>
                 </p>
-                {% if element.is_online %} 
+                {% if element.is_online %}
                 <div class="status available"></div>
                 {% endif %}
-            </div>   
-        </div>                
+            </div>
+        </div>
         {% endfor %}
-        
+
     </div>
-    <div id="chatview" class="p1">    	
+
+    <div id="chatview" class="p1">
 
         <div id="chat-messages">
-{% for element in messages %}
+            {% for element in messages %}
             <div class="message">
                 <div class="bubble">
-                <div id = 'user'>{{element.from}} </div>
-                {{element.message}}
+                    <div class='user'>{{element.from}}</div>
+                    {{element.message}}
                     <div class="corner"></div>
                 </div>
             </div>
-            {% endfor %} 
+            {% endfor %}
         </div>
-    	<div id ="user"> </div>
+
+        <div class="user"></div>
         <form id="sendmessage">
-        	<input id="message" type="text" value="Send message..." />
-    <button id="send" onclick="socket.emit('chat message', {msg: $('#message').val(), from: '{{currentUser}}' });
-    $('#message').val('');
-    return false;"></button>
+            <input id="message" type="text" value="Send message..."/>
+
+            <button id="send" onclick="socket.emit('chat message', {msg: $('#message').val(), from: '{{currentUser}}' });
+            $('#message').val('');
+            return false;">
+            </button>
+
         </form>
-    
-    </div>        
+
     </div>
+</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script src="js/index.js"></script>
-  </body>
+<script src="js/index.js"></script>
+</body>
 </html>
