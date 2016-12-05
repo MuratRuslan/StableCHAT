@@ -1,6 +1,9 @@
 var express = require('express');
 var db = require("../database/db.js");
 var router = express.Router();
+var login = require("./login.js");
+var register = require("./register.js");
+var chat = require("./chat.js");
 
 /* GET home page. */
 router.get('/', function (req, res) {
@@ -8,24 +11,7 @@ router.get('/', function (req, res) {
 });
 
 router.post("/", function (req, res) {
-    db.hasUser(req.body.email, function (UserResult) {
-        if (UserResult === true) {
-            db.checkPass(req.body.email, req.body.pass, function (PassResult) {
-                if (PassResult === true) {
-                    req.session.user_id = req.body.email;
-                    db.updateStatus(req.session.user_id, true);
-                    res.redirect("/chat");
-                    return;
-                }
-                if(PassResult === false) {
-                    res.send("incorrect password");
-                }
-            })
-        }
-        if (UserResult === false) {
-            res.send("incorrect email");
-        }
-    })
+   login.login(req, res);
 });
 
 router.get("/register", function (req, res) {
@@ -33,34 +19,15 @@ router.get("/register", function (req, res) {
 });
 
 router.post("/register", function (req, res) {
-    var obj = req.body;
-    console.log(typeof obj.mail);
-    db.addUser(obj.mail, obj.pass);
-    res.redirect("/");
+    register.register(req, res);
 });
 
 router.post("/chat", function (req, res) {
-    db.updateStatus(req.session.user_id, false);
-    delete req.session.user_id;
-    delete req.user;
-    delete req.cookies;
-    res.redirect('/');
+    chat.deleteSession(req, res);
 });
 
 router.get("/chat", function (req, res) {
-    if (!req.session.user_id) {
-        res.redirect("/");
-        return;
-    }
-    if (req.session.user_id) {
-        db.getAll(function (result) {
-            var currentUser = req.session.user_id;
-            names = result;
-            db.getAllMessages(function (resMess) {
-                res.render("Chatlist/index.html", {names: result, currentUser: currentUser, messages: resMess});
-            });
-        });
-    }
+    chat.initializeChat(req, res);
 });
 
 module.exports = router;

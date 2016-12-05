@@ -7,8 +7,8 @@
 6 silly lifecycle CHAT@0.0.0~prestart: no script for prestart, continuing
 7 info lifecycle CHAT@0.0.0~start: CHAT@0.0.0
 8 verbose lifecycle CHAT@0.0.0~start: unsafe-perm in lifecycle true
-9 verbose lifecycle CHAT@0.0.0~start: PATH: /usr/lib/node_modules/npm/bin/node-gyp-bin:/home/murat/chatStable/node_modules/.bin:/home/murat/bin:/home/murat/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
-10 verbose lifecycle CHAT@0.0.0~start: CWD: /home/murat/chatStable
+9 verbose lifecycle CHAT@0.0.0~start: PATH: /usr/lib/node_modules/npm/bin/node-gyp-bin:/media/murat/7E2CC1CE2CC1819F/Users/Fujitsu/Desktop/chat/StableCHAT/node_modules/.bin:/home/murat/bin:/home/murat/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+10 verbose lifecycle CHAT@0.0.0~start: CWD: /media/murat/7E2CC1CE2CC1819F/Users/Fujitsu/Desktop/chat/StableCHAT
 11 silly lifecycle CHAT@0.0.0~start: Args: [ '-c', 'node ./bin/www' ]
 12 silly lifecycle CHAT@0.0.0~start: Returned: code: 1  signal: null
 13 info lifecycle CHAT@0.0.0~start: Failed to exec start script
@@ -23,7 +23,7 @@
 14 verbose stack     at maybeClose (internal/child_process.js:877:16)
 14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:226:5)
 15 verbose pkgid CHAT@0.0.0
-16 verbose cwd /home/murat/chatStable
+16 verbose cwd /media/murat/7E2CC1CE2CC1819F/Users/Fujitsu/Desktop/chat/StableCHAT
 17 error Linux 4.4.0-47-generic
 18 error argv "/usr/bin/nodejs" "/usr/bin/npm" "start"
 19 error node v6.9.1
